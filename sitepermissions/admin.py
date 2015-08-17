@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.contrib.admin.options import ModelAdmin, StackedInline
 from django.contrib.admin.sites import NotRegistered
 from django.contrib.admin import site
@@ -7,7 +8,7 @@ from sitepermissions.models import SiteGroup
     
 def invalid_form(form):
     def deco(**errors):
-        form._update_errors(errors)
+        form._update_errors(ValidationError(errors))
         return False
     return deco
 
